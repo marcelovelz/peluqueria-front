@@ -1,0 +1,29 @@
+.card {
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+}
+
+.card-header {
+  border-radius: 15px 15px 0 0; /* Borde redondeado solo arriba */
+  background-color: #3498db; /* Color azul más suave para el encabezado */
+}
+
+.card-body {
+  padding: 25px; /* Incrementar el espaciado interno */
+}
+
+.text-center.mb-4 {
+  margin-bottom: 2rem; /* Ajustar el espacio alrededor de la imagen */
+}
+
+.btn-primary {
+  background-color: #3498db; /* Color azul más suave para el botón */
+  border-color: #3498db; /* Color del borde del botón */
+  margin-top: 1rem; /* Espacio adicional entre el formulario y el botón */
+  width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
+}
+
+.btn-primary:hover {
+  background-color: #2980b9; /* Cambio de color de fondo al pasar el mouse */
+  border-color: #2980b9; /* Cambio de color del borde al pasar el mouse */
+}

@@ -1,0 +1,133 @@
+<app-navigation-menu></app-navigation-menu>
+<div class="container">
+  <h2>Listado de citas</h2>
+
+  <div class="form-group">
+    <label for="clientFilter">Filtrar por Nombre de Cliente:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="clientFilter"
+      [(ngModel)]="filterClientName"
+      (keyup)="applyFilter()"
+    />
+  </div>
+
+  <button type="button" class="btn btn-primary mb-3" (click)="openModal()">
+    Crear Nueva Cita
+  </button>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Cliente</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of filteredAppointments">
+          <td>{{ appointment.id }}</td>
+          <td>{{ appointment.date | date : "short" }}</td>
+          <td>
+            {{ appointment.client?.name }} {{ appointment.client?.lastName }}
+          </td>
+          <td>
+            <button
+              class="btn btn-info btn-sm"
+              (click)="viewServices(appointment)"
+            >
+              Ver Servicios
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Crear Nueva Cita</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="saveAppointment()" #appointmentForm="ngForm">
+      <div class="form-group">
+        <label for="date">Fecha</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="date"
+          name="date"
+          [(ngModel)]="newAppointment.date"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="client">Cliente</label>
+        <select
+          class="form-control"
+          id="client"
+          name="clientId"
+          [(ngModel)]="newAppointment.clientId"
+          required
+        >
+          <option *ngFor="let client of clients" [value]="client.id">
+            {{ client.name }} {{ client.lastName }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #servicesModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Servicios de la Cita</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+      style="margin-left: auto"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5>Servicios para la Cita ID {{ selectedAppointment?.id }}</h5>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let service of appointmentServices">
+        {{ service.description }}
+      </li>
+    </ul>
+    <hr />
+    <form (ngSubmit)="saveService()" #serviceForm="ngForm">
+      <div class="form-group">
+        <label for="description">Descripción del Servicio:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          name="description"
+          [(ngModel)]="newService.description"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary mt-3 float-end">
+        Agregar Servicio
+      </button>
+    </form>
+  </div>
+</ng-template>

@@ -1,0 +1,28 @@
+<app-navigation-menu></app-navigation-menu>
+<div class="container">
+  <h2>Listado de Atenciones Realizadas</h2>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Cliente</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of services">
+          <td>{{ service.id }}</td>
+          <td>{{ service.appointment?.date | date : "short" }}</td>
+          <td>
+            {{ service.appointment?.client?.name }}
+            {{ service.appointment?.client?.lastName }}
+          </td>
+          <td>{{ service.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

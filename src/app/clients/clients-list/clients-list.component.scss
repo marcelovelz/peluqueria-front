@@ -1,0 +1,27 @@
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.close {
+  margin-left: auto;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-content {
+  padding: 20px;
+}
