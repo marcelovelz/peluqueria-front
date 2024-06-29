@@ -48,10 +48,58 @@
         <div class="card-footer bg-primary text-white">
           <p class="text-center mb-0">
             ¿No tienes cuenta?
-            <a routerLink="/registro" class="text-white">Regístrate aquí</a>
+            <a (click)="openModal()" class="text-white" style="cursor:pointer;">Regístrate aquí</a>
           </p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #registroModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Registro de Usuario</h5>
+    <button
+      type="button"
+      class="close ml-auto"
+      aria-label="Close"
+      style="margin-left: auto"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="register(modal)" #registroForm="ngForm">
+      <div class="form-group">
+        <label for="regUsername">Usuario</label>
+        <input
+          type="text"
+          class="form-control"
+          id="regUsername"
+          name="username"
+          [(ngModel)]="regUsername"
+          required
+        />
+        <div class="invalid-feedback">Por favor ingrese su usuario.</div>
+      </div>
+      <div class="form-group">
+        <label for="regPassword">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="regPassword"
+          name="password"
+          [(ngModel)]="regPassword"
+          required
+        />
+        <div class="invalid-feedback">
+          Por favor ingrese su contraseña.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

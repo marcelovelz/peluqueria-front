@@ -45,6 +45,9 @@ export class ClientsListComponent implements OnInit {
   }
 
   saveClient(modal: NgbModalRef) {
+    if (!this.validateClient()) {
+      return alert('Por favor, llene todos los campos');
+    }
     this.clientService.createClient(this.newClient).subscribe(
       (response) => {
         console.log('Cliente guardado con éxito:', response);
@@ -54,6 +57,15 @@ export class ClientsListComponent implements OnInit {
       (error) => {
         console.error('Error al guardar el cliente:', error);
       }
+    );
+  }
+
+  validateClient(): boolean {
+    return (
+      this.newClient.identificationNumber !== '' &&
+      this.newClient.name !== '' &&
+      this.newClient.email !== '' &&
+      this.newClient.phone !== ''
     );
   }
 }

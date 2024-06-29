@@ -54,7 +54,17 @@ export class AppointmentsListComponent implements OnInit {
     this.modalRef = this.modalService.open(this.content, { size: 'lg' });
   }
 
+  validateAppointment(): boolean {
+    return (
+      this.newAppointment.clientId !== undefined &&
+      this.newAppointment.date !== undefined
+    );
+  }
+
   saveAppointment(): void {
+    if (!this.validateAppointment()) {
+      return alert('Por favor, llene todos los campos');
+    }
     this.appointmentsService
       .createAppointment(this.newAppointment)
       .subscribe(() => {
@@ -92,7 +102,14 @@ export class AppointmentsListComponent implements OnInit {
       });
   }
 
+  validateService(): boolean {
+    return this.newService.description !== undefined;
+  }
+
   saveService(): void {
+    if (!this.validateService()) {
+      return alert('Por favor, llene todos los campos');
+    }
     if (this.selectedAppointment) {
       const serviceData: Partial<Service> = {
         description: this.newService.description,
